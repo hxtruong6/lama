@@ -117,6 +117,7 @@ def remove_object_func(input_image, output_image, mask_image=None) -> bool:
     except Exception as ex:
         logger.critical(f"Prediction failed due to {ex}:\n{traceback.format_exc()}")
         # sys.exit(1)
+        raise ex
         
         
     end_time = time.time()
