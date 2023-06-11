@@ -42,7 +42,7 @@ from saicinpainting.training.trainers import load_checkpoint
 
 
 # @hydra.main(config_path="../configs/prediction", config_name="default.yaml")
-def remove_object_func(input_image, output_image, mask_image=None):
+def remove_object_func(input_image, output_image, mask_image=None) -> bool:
     start_time = time.time()
 
     try:
@@ -108,14 +108,20 @@ def remove_object_func(input_image, output_image, mask_image=None):
         cur_res = cv2.cvtColor(cur_res, cv2.COLOR_RGB2BGR)
         cv2.imwrite(cur_out_fname, cur_res)
 
+        end_time = time.time()
+        logger.info(f"Prediction took {end_time - start_time:.3f} seconds")
+
+        return cur_out_fname
     except KeyboardInterrupt:
         logger.warning("Interrupted by user")
     except Exception as ex:
         logger.critical(f"Prediction failed due to {ex}:\n{traceback.format_exc()}")
         # sys.exit(1)
-
+        
+        
     end_time = time.time()
     logger.info(f"Prediction took {end_time - start_time:.3f} seconds")
+    return False
 
 
 if __name__ == "__main__":
