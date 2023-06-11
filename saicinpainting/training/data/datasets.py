@@ -14,7 +14,7 @@ from skimage.feature import canny
 from skimage.transform import rescale, resize
 from torch.utils.data import Dataset, IterableDataset, DataLoader, DistributedSampler, ConcatDataset
 
-from saicinpainting.evaluation.data import InpaintingDataset as InpaintingEvaluationDataset, \
+from saicinpainting.evaluation.data import InpaintingDataset as InpaintingEvaluationDataset, InpaintingDatasetSingle, \
     OurInpaintingDataset as OurInpaintingEvaluationDataset, ceil_modulo, InpaintingEvalOnlineDataset
 from saicinpainting.training.data.aug import IAAAffine2, IAAPerspective2
 from saicinpainting.training.data.masks import get_mask_generator
@@ -278,6 +278,19 @@ def make_default_val_dataset(indir, kind='default', out_size=512, transform_vari
         raise ValueError(f'Unknown val dataset kind {kind}')
 
     return dataset
+
+
+
+
+def make_dataset_single(input_image,mask_image, kind='default', out_size=512, transform_variant='default', **kwargs):
+    if kind == 'default':
+        dataset = InpaintingDatasetSingle(input_image=input_image, mask_image=mask_image, **kwargs)
+                                          
+    else:
+        raise ValueError(f'Unknown val dataset kind {kind}')
+
+    return dataset
+
 
 
 def make_default_val_dataloader(*args, dataloader_kwargs=None, **kwargs):

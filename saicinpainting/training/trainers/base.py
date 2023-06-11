@@ -68,7 +68,8 @@ class BaseInpaintingTrainingModule(ptl.LightningModule):
         self.use_ddp = use_ddp
 
         if not get_has_ddp_rank():
-            LOGGER.info(f'Generator\n{self.generator}')
+            LOGGER.info("Not DDP rank")
+            # LOGGER.info(f'Generator\n{self.generator}')
 
         if not predict_only:
             self.save_hyperparameters(self.config)

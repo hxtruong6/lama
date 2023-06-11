@@ -1,3 +1,7 @@
+LaMa_models/
+*.zip
+output/
+LaMa_test_images*/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
