@@ -17,10 +17,7 @@ class JITWrapper(nn.Module):
         self.model = model
 
     def forward(self, image, mask):
-        batch = {
-            "image": image,
-            "mask": mask
-        }
+        batch = {"image": image, "mask": mask}
         out = self.model(batch)
         return out["inpainted"]
 
@@ -56,7 +53,9 @@ def main(predict_config: OmegaConf):
 
     image = image.to(device)
     mask = mask.to(device)
-    traced_model = torch.jit.trace(jit_model_wrapper, (image, mask), strict=False).to(device)
+    traced_model = torch.jit.trace(jit_model_wrapper, (image, mask), strict=False).to(
+        device
+    )
 
     save_path = Path(predict_config.save_path)
     save_path.parent.mkdir(parents=True, exist_ok=True)

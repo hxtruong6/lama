@@ -131,4 +131,3 @@ def main(predict_config: OmegaConf):
 
 if __name__ == "__main__":
     main()
-   
