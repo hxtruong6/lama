@@ -107,15 +107,7 @@ def remove_object_func(input_image, output_image, mask_image=None) -> bool:
         cur_res = np.clip(cur_res * 255, 0, 255).astype("uint8")
         cur_res = cv2.cvtColor(cur_res, cv2.COLOR_RGB2BGR)
         cv2.imwrite(cur_out_fname, cur_res)
-
-        end_time = time.time()
-        logger.info(f"Prediction took {end_time - start_time:.3f} seconds")
         
-        logger.info(f"Device: {device} | {device == 'cuda'}")
-        # if device == "cuda":
-        logger.info("Clearing CUDA cache...")
-        torch.cuda.empty_cache()
-
         return cur_out_fname
     except KeyboardInterrupt:
         logger.warning("Interrupted by user")
@@ -123,12 +115,13 @@ def remove_object_func(input_image, output_image, mask_image=None) -> bool:
         logger.critical(f"Prediction failed due to {ex}:\n{traceback.format_exc()}")
         # sys.exit(1)
         raise ex
-        
-        
-    end_time = time.time()
-    logger.info(f"Prediction took {end_time - start_time:.3f} seconds")
-    return False
-
+    finally:
+        end_time = time.time()
+        logger.info(f"Prediction took {end_time - start_time:.3f} seconds")
+        logger.info(f"Device: {device} | {device == 'cuda'}")
+        # if device == "cuda":
+        logger.info("Clearing CUDA cache...")
+        torch.cuda.empty_cache()
 
 if __name__ == "__main__":
     remove_object_func(
