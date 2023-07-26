@@ -118,7 +118,7 @@ def remove_object_func(input_image, output_image, mask_image=None) -> bool:
     finally:
         end_time = time.time()
         logger.info(f"Prediction took {end_time - start_time:.3f} seconds")
-        logger.info(f"Device: {device} | {device == 'cuda'}")
+        # logger.info(f"Device: {device}")
         # if device == "cuda":
         logger.info("Clearing CUDA cache...")
         torch.cuda.empty_cache()

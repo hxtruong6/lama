@@ -1,8 +1,8 @@
 indir: no  # to be overriden in CLI
-outdir: /home/ubuntu/WORK/remove-obj/external_services/image_inpainting/output  # to be overriden in CLI
+outdir: /home/ubuntu/WORK/remove-object/external_services/remove_object/output  # to be overriden in CLI
 
 model:
-  path: /home/ubuntu/WORK/remove-obj/external_services/image_inpainting/LaMa_models/big-lama  # to be overriden in CLI
+  path: /home/ubuntu/WORK/remove-object/external_services/remove_object/LaMa_models/big-lama  # to be overriden in CLI | Download model and put in LaMa_models folder
   checkpoint: best.ckpt
 
 dataset:
