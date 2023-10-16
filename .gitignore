@@ -1,4 +1,5 @@
 LaMa_models/
+detectron2
 *.zip
 output/
 LaMa_test_images*/
